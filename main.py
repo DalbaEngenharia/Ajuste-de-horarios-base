@@ -54,8 +54,8 @@ os.chdir(base_dir)
 # =========================
 # CONFIG
 # =========================
-homologacao = True
-teste = 1
+homologacao = False
+teste = 0
 
 chrome_options = Options()
 
@@ -149,16 +149,21 @@ login(driver, wait, credenciais)
 funcao_tres_e_demais(driver,"wa-button", "Fechar")
 log("SELECIONANDO AMBIENTE 02")
 sel_ambiente(driver, wait, "02", homologacao, DataRetroativaBool, DataRetroativa,ambiente_padrão=False)
+
 try: 
     funcao_tres_e_demais(driver, "wa-button", "Confirmar")
 except: 
     None
+time.sleep(5)
+#############################################################
+
 menus_acesso = ["U","Senhas", "Grupos"]
 for menu in menus_acesso: 
     funcao_tres_e_demais(driver, "wa-menu-item", menu)
 selecao_grupos.selecao_grupo(driver)
-log("FINALIZANDO")
 
+
+log("FINALIZANDO")
 encerrar_sistema(driver)
 time.sleep(5)
 driver.quit()

@@ -33,7 +33,9 @@ def selecao_grupo(driver):
         time.sleep(1)
         grupos = linhas_de_tabela(driver,"COMP6013" )
         colunas=colunas_da_tabela(driver,grupos)
-
+        id = str(colunas[indice][0]).strip()
+        print("COLUNAAAAA: ", colunas[indice])
+        
         try:
             print("Try 1")
             print("Indice: ", indice)
@@ -41,12 +43,13 @@ def selecao_grupo(driver):
             print("TESTE: ", colunas[indice])
             print("TESTE: ", colunas[indice+1])
             if colunas[indice + 1]: 
-                None
-            if any(grupo.lower() in colunas[indice][2].lower() for grupo in descricoes_de_grupos_a_ignorar):
+                None                
+            if any(grupo.lower() in colunas[indice][2].lower() for grupo in descricoes_de_grupos_a_ignorar) or ("*" in id) or (not id.isdigit()) or (int(id) < 16):
                 indice = indice + 1 
                 descer_para_proxima_na_tabela(driver,id_tabela_horarios)
 
                 continue
+
         except:
             if indice == 14: 
                 verifica_fim_da_lista(driver)
